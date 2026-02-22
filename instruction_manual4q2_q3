@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Tasks Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      overflow-x: auto;
+      border-radius: 5px;
+    }
+    .note {
+      background-color: #fffae6;
+      padding: 10px;
+      border-left: 5px solid #ffdd57;
+      margin: 10px 0;
+    }
+    a {
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Git Tasks Guide</h1>
+  <p>This page provides step-by-step instructions for two Git tasks:</p>
+  <ol>
+    <li>Removing <code>.env</code> from the entire Git history and cleaning up secrets.</li>
+    <li>Finding the parent commit of a <code>config.json</code> timeout change.</li>
+  </ol>
+
+  <hr>
+
+  <h2>Task 1: Remove <code>.env</code> from Git history</h2>
+
+  <p>⚠️ <strong>Warning:</strong> This rewrites Git history. Make sure you have backups or are working alone.</p>
+
+  <h3>Step 1 — Open terminal in your project folder</h3>
+  <p>Make sure you are in the root of your repository (where <code>.git</code> is).</p>
+
+  <h3>Step 2 — Install <code>git-filter-repo</code> (if needed)</h3>
+  <pre><code>pip install git-filter-repo</code></pre>
+
+  <h3>Step 3 — Remove <code>.env</code> from all commits</h3>
+  <pre><code>git filter-repo --path .env --invert-paths</code></pre>
+  <p>Or if prompted, force it:</p>
+  <pre><code>git filter-repo --force --path .env --invert-paths</code></pre>
+
+  <h3>Step 4 — Clean up references</h3>
+  <pre><code>rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive</code></pre>
+
+  <h3>Step 5 — Verify <code>.env</code> is gone</h3>
+  <pre><code>git log -- .env</code></pre>
+
+  <h3>Step 6 — Add <code>.gitignore</code> and <code>.env.example</code></h3>
+  <pre><code>echo ".env" >> .gitignore
+touch .env.example</code></pre>
+  <p>Example content for <code>.env.example</code>:</p>
+  <pre><code>SECRET_KEY=your_secret_key_here
+DATABASE_URL=postgresql://username:password@localhost:5432/db_name
+JWT_SECRET_KEY=your_jwt_secret_key_here
+REDIS_URL=redis://localhost:6379/0
+DEBUG=True</code></pre>
+
+  <h3>Step 7 — Commit the changes</h3>
+  <pre><code>git add .gitignore .env.example
+git commit -m "Remove .env and add .gitignore + .env.example"</code></pre>
+
+  <h3>Step 8 — Force push to GitHub</h3>
+  <pre><code>git remote add origin https://github.com/yourusername/yourrepo.git
+git push -u origin main --force
+git push origin --force --tags</code></pre>
+
+  <div class="note">
+    ⚠️ If your <code>.env</code> contained secrets, rotate all keys and passwords immediately.
+  </div>
+
+  <hr>
+
+  <h2>Task 2: Find parent commit of timeout change in <code>config.json</code></h2>
+
+  <h3>Step 1 — View commit history for <code>config.json</code></h3>
+  <pre><code>git log -- config.json</code></pre>
+
+  <h3>Step 2 — Inspect commits to find timeout change</h3>
+  <pre><code>git show c4b9cda</code></pre>
+  <p>Look for a diff like:</p>
+  <pre><code>- "timeout": 180,
++ "timeout": 45,</code></pre>
+
+  <h3>Step 3 — Find parent commit</h3>
+  <pre><code>git rev-parse c4b9cda^</code></pre>
+
+  <h3>Step 4 — Get the 7-character short hash</h3>
+  <pre><code>git rev-parse --short 8231c70d8f4e5b2a9f1234567890abcdef123456
+# Output: 8231c70</code></pre>
+<!--email_off-->23f1000918@ds.study.iitm.ac.in<!--/email_off-->
+  <div class="note">
+    ✅ The short hash <code>8231c70</code> is the parent commit of the timeout change.
+  </div>
+
+  <hr>
+
+  <p>These steps cover:</p>
+  <ul>
+    <li>Removing sensitive files from Git history</li>
+    <li>Cleaning up `.gitignore` and creating `.env.example`</li>
+    <li>Investigating Git commit history to find a specific change</li>
+  </ul>
+
+</body>
+</html>
