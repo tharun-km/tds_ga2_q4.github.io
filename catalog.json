@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "email": "23f1000918@ds.study.iitm.ac.in",
+    "version": 55011627
+  },
+  "products": [
+    { "id": 1, "name": "Wireless Mouse", "category": "electronics", "price": 799.99, "stock": 50, "rating": 4.4 },
+    { "id": 2, "name": "Bluetooth Headphones", "category": "electronics", "price": 1999.50, "stock": 35, "rating": 4.6 },
+    { "id": 3, "name": "USB-C Charger", "category": "electronics", "price": 499.00, "stock": 100, "rating": 4.2 },
+    { "id": 4, "name": "Gaming Keyboard", "category": "electronics", "price": 2499.99, "stock": 25, "rating": 4.7 },
+    { "id": 5, "name": "Smartphone Stand", "category": "electronics", "price": 299.99, "stock": 75, "rating": 4.1 },
+
+    { "id": 6, "name": "Men's T-Shirt", "category": "clothing", "price": 599.00, "stock": 60, "rating": 4.3 },
+    { "id": 7, "name": "Women's Jeans", "category": "clothing", "price": 1499.75, "stock": 40, "rating": 4.5 },
+    { "id": 8, "name": "Sneakers", "category": "clothing", "price": 2499.00, "stock": 30, "rating": 4.6 },
+    { "id": 9, "name": "Jacket", "category": "clothing", "price": 3199.99, "stock": 20, "rating": 4.7 },
+    { "id": 10, "name": "Cap", "category": "clothing", "price": 399.50, "stock": 80, "rating": 4.0 },
+
+    { "id": 11, "name": "Cookware Set", "category": "home", "price": 3499.00, "stock": 15, "rating": 4.5 },
+    { "id": 12, "name": "LED Bulb Pack", "category": "home", "price": 699.99, "stock": 90, "rating": 4.3 },
+    { "id": 13, "name": "Vacuum Cleaner", "category": "home", "price": 5999.00, "stock": 10, "rating": 4.6 },
+    { "id": 14, "name": "Wall Clock", "category": "home", "price": 899.00, "stock": 45, "rating": 4.2 },
+
+    { "id": 15, "name": "The Art of Coding", "category": "books", "price": 4500.00, "stock": 3, "rating": 4.8 },
+    { "id": 16, "name": "Data Science Handbook", "category": "books", "price": 5200.13, "stock": 2, "rating": 4.7 },
+    { "id": 17, "name": "AI for Beginners", "category": "books", "price": 3000.00, "stock": 2, "rating": 4.5 },
+
+    { "id": 18, "name": "Yoga Mat", "category": "sports", "price": 999.00, "stock": 50, "rating": 4.4 },
+    { "id": 19, "name": "Dumbbell Set", "category": "sports", "price": 4599.00, "stock": 18, "rating": 4.6 },
+    { "id": 20, "name": "Football", "category": "sports", "price": 799.99, "stock": 70, "rating": 4.3 }
+  ],
+  "aggregations": {
+    "books": {
+      "count": 3,
+      "inventoryValue": 30340.13
+    }
+  }
+}
